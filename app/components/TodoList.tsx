@@ -5,9 +5,17 @@ import TodoCard from "./TodoCard";
 interface Props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  currentTab: string;
 }
 
-const TodoList = ({ todos, setTodos }: Props) => {
+const TodoList = ({ todos, setTodos, currentTab }: Props) => {
+  const filteredTodos =
+    currentTab === "All"
+      ? todos
+      : todos.filter((todo) => {
+          return todo.status == currentTab;
+        });
+
   const handleDone = (todoIndex: number) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo, index) =>
@@ -24,9 +32,9 @@ const TodoList = ({ todos, setTodos }: Props) => {
   };
   return (
     <div>
-      {todos ? (
+      {filteredTodos ? (
         <div>
-          {todos.map((todo, todoIndex) => (
+          {filteredTodos.map((todo, todoIndex) => (
             <div className="flex gap-2" key={todoIndex}>
               <TodoCard todo={todo}></TodoCard>
               <button onClick={() => handleDone(todoIndex)}>Done</button>

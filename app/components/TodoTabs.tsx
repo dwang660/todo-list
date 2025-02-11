@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Todo, TodoStatus } from "../types/todo";
 
-const TodoTabs = ({ todos }: { todos: Todo[] }) => {
+const TodoTabs = ({
+  todos,
+  setCurrentTab,
+}: {
+  todos: Todo[];
+  setCurrentTab: (card: string) => void;
+}) => {
   const [todoOpen, setTodoOpen] = useState<Todo[]>([]);
   const [todoInProgress, setTodoInProgress] = useState<Todo[]>([]);
   const [todoCompleted, setTodoCompleted] = useState<Todo[]>([]);
@@ -50,10 +56,17 @@ const TodoTabs = ({ todos }: { todos: Todo[] }) => {
     setTabs(tabs);
   }, [todos]);
 
+  const handleTabClick = (card: string) => {
+    setCurrentTab(card);
+  };
   return (
     <div className="flex">
       {tabs.map((tab, tabIndex) => (
-        <button className="p-2" key={tabIndex}>
+        <button
+          className="p-2"
+          key={tabIndex}
+          onClick={() => handleTabClick(tab.name)}
+        >
           {`${tab.name}(${tab.count})`}
         </button>
       ))}

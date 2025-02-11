@@ -15,6 +15,8 @@ export default function Home() {
     { input: "text3", status: TodoStatus.COMPLETED },
   ]);
 
+  const [currentTab, setCurrentTab] = useState("All");
+
   const [input, setInput] = useState("");
 
   //useEffect(() => {}, [todos]);
@@ -33,11 +35,20 @@ export default function Home() {
     console.log(todos);
   }, [todos]);
 
+  useEffect(() => {
+    console.log("Current Tab");
+    console.log(currentTab);
+  }, [currentTab]);
+
   return (
     <div className="">
       <Header></Header>
-      <TodoTabs todos={todos}></TodoTabs>
-      <TodoList todos={todos} setTodos={setTodos}></TodoList>
+      <TodoTabs todos={todos} setCurrentTab={setCurrentTab}></TodoTabs>
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        currentTab={currentTab}
+      ></TodoList>
       <div>
         <input type="text" value={input} onChange={handleChange}></input>
         <button onClick={handleAdd}>add</button>
