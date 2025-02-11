@@ -9,11 +9,16 @@ import { Todo, TodoStatus } from "./types/todo";
 import { ReactElement, ReactEventHandler, useEffect, useState } from "react";
 
 export default function Home() {
-  const [todos, setTodos] = useState<Todo[]>([
-    { input: "text1", status: TodoStatus.OPEN },
-    { input: "text2", status: TodoStatus.IN_PROGRESS },
-    { input: "text3", status: TodoStatus.COMPLETED },
-  ]);
+  // const [todos, setTodos] = useState<Todo[]>([
+  //   { input: "text1", status: TodoStatus.OPEN },
+  //   { input: "text2", status: TodoStatus.IN_PROGRESS },
+  //   { input: "text3", status: TodoStatus.COMPLETED },
+  // ]);
+
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const storedTodos = localStorage.getItem("todo-list");
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
 
   const [currentTab, setCurrentTab] = useState("All");
 
@@ -31,14 +36,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log("Todos in page");
-    console.log(todos);
+    const storedTodos = localStorage.getItem("todo-list");
+    if (storedTodos !== JSON.stringify(todos)) {
+      localStorage.setItem("todo-list", JSON.stringify(todos));
+    }
   }, [todos]);
-
-  useEffect(() => {
-    console.log("Current Tab");
-    console.log(currentTab);
-  }, [currentTab]);
 
   return (
     <div className="">
