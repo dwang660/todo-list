@@ -31,36 +31,54 @@ const TodoList = ({ todos, setTodos, currentTab }: Props) => {
     setTodos(newTodos);
   };
   return (
-    <div>
-      {filteredTodos ? (
-        <table className="table-auto">
-          <thead>
-            <tr>
-              <td>Descripion</td>
-              <td>Status</td>
-              <td>Action</td>
-              <td>Action</td>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTodos.map((todo, todoIndex) => (
-              <tr key={todoIndex}>
-                <td>{todo.input}</td>
-                <td>{todo.status}</td>
-                <td>
-                  <button onClick={() => handleDone(todoIndex)}>Done</button>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(todoIndex)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="mt-6 space-y-4">
+      {filteredTodos.length > 0 ? (
+        filteredTodos.map((todo, todoIndex) => (
+          <div
+            key={todoIndex}
+            className="bg-white p-4 rounded-lg border-l-4 transition-all shadow-md hover:shadow-lg border-gray-300"
+          >
+            <p className="text-gray-800 text-lg font-semibold">{todo.input}</p>
+            <div className="flex items-center justify-between mt-3">
+              <span
+                className={`flex items-center rounded-full text-sm font-medium px-3 py-1
+                    ${
+                      todo.status === TodoStatus.COMPLETED &&
+                      "bg-green-100 text-green-600"
+                    } 
+                    ${
+                      todo.status === TodoStatus.OPEN &&
+                      "bg-gray-100 text-gray-600"
+                    } 
+                    ${
+                      todo.status === TodoStatus.IN_PROGRESS &&
+                      "bg-yellow-100 text-yellow-600"
+                    }`}
+              >
+                {todo.status}
+              </span>
+              <div className="flex gap-3">
+                <button
+                  className="rounded-lg px-4 py-2 bg-green-400 text-white text-sm hover:bg-green-600 transition"
+                  onClick={() => handleDone(todoIndex)}
+                >
+                  Done
+                </button>
+
+                <button
+                  className="rounded-lg px-4 py-2 bg-red-400 text-white text-sm hover:bg-red-600 transition"
+                  onClick={() => handleDelete(todoIndex)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
       ) : (
-        <div>The todo list is empty</div>
+        <div className="text-center text-gray-600 mt-6 text-lg">
+          The todo list is empty
+        </div>
       )}
     </div>
   );
