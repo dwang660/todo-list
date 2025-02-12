@@ -43,17 +43,32 @@ export default function Home() {
   }, [todos]);
 
   return (
-    <div className="">
+    <div className="max-w-lg mx-auto my-10 p-6 bg-white shadow-md rounded-lg">
       <Header></Header>
-      <TodoTabs todos={todos} setCurrentTab={setCurrentTab}></TodoTabs>
+      <TodoTabs
+        todos={todos}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+      ></TodoTabs>
       <TodoList
         todos={todos}
         setTodos={setTodos}
         currentTab={currentTab}
       ></TodoList>
-      <div>
-        <input type="text" value={input} onChange={handleChange}></input>
-        <button onClick={handleAdd}>add</button>
+      <div className="flex items-center gap-2 mt-6">
+        <input
+          className="flex-1 border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+          type="text"
+          value={input}
+          placeholder="Add a new task..."
+          onChange={handleChange}
+        ></input>
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300"
+          onClick={handleAdd}
+        >
+          add
+        </button>
       </div>
     </div>
   );

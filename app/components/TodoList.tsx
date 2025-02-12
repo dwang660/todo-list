@@ -33,15 +33,32 @@ const TodoList = ({ todos, setTodos, currentTab }: Props) => {
   return (
     <div>
       {filteredTodos ? (
-        <div>
-          {filteredTodos.map((todo, todoIndex) => (
-            <div className="flex gap-2" key={todoIndex}>
-              <TodoCard todo={todo}></TodoCard>
-              <button onClick={() => handleDone(todoIndex)}>Done</button>
-              <button onClick={() => handleDelete(todoIndex)}>Delete</button>
-            </div>
-          ))}
-        </div>
+        <table className="table-auto">
+          <thead>
+            <tr>
+              <td>Descripion</td>
+              <td>Status</td>
+              <td>Action</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredTodos.map((todo, todoIndex) => (
+              <tr key={todoIndex}>
+                <td>{todo.input}</td>
+                <td>{todo.status}</td>
+                <td>
+                  <button onClick={() => handleDone(todoIndex)}>Done</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(todoIndex)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <div>The todo list is empty</div>
       )}
