@@ -16,17 +16,17 @@ const TodoList = ({ todos, setTodos, currentTab }: Props) => {
           return todo.status == currentTab;
         });
 
-  const handleDone = (todoIndex: number) => {
+  const handleDone = (todoId: string) => {
     setTodos((prevTodos) =>
-      prevTodos.map((todo, index) =>
-        index === todoIndex ? { ...todo, status: TodoStatus.COMPLETED } : todo
+      prevTodos.map((todo) =>
+        todo.id === todoId ? { ...todo, status: TodoStatus.COMPLETED } : todo
       )
     );
   };
 
-  const handleDelete = (todoIndex: number) => {
-    const newTodos = todos.filter((todo, index) => {
-      return todoIndex != index;
+  const handleDelete = (todoId: string) => {
+    const newTodos = todos.filter((todo) => {
+      return todoId != todo.id;
     });
     setTodos(newTodos);
   };
@@ -60,14 +60,14 @@ const TodoList = ({ todos, setTodos, currentTab }: Props) => {
               <div className="flex gap-3">
                 <button
                   className="rounded-lg px-4 py-2 bg-green-400 text-white text-sm hover:bg-green-600 transition"
-                  onClick={() => handleDone(todoIndex)}
+                  onClick={() => handleDone(todo.id)}
                 >
                   Done
                 </button>
 
                 <button
                   className="rounded-lg px-4 py-2 bg-red-400 text-white text-sm hover:bg-red-600 transition"
-                  onClick={() => handleDelete(todoIndex)}
+                  onClick={() => handleDelete(todo.id)}
                 >
                   Delete
                 </button>

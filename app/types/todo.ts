@@ -6,6 +6,7 @@ export enum TodoStatus {
 
 
 export interface Todo {
+    id:string,
     input:string,
     status:TodoStatus,
 }

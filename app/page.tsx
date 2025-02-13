@@ -6,6 +6,7 @@ import TodoTabs from "./components/TodoTabs";
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import { Todo, TodoStatus } from "./types/todo";
+import { v4 as uuidv4 } from "uuid";
 import { ReactElement, ReactEventHandler, useEffect, useState } from "react";
 
 export default function Home() {
@@ -30,7 +31,11 @@ export default function Home() {
     setInput(e.target.value);
   };
   const handleAdd = () => {
-    const newTodos = todos.concat({ input: input, status: TodoStatus.OPEN });
+    const newTodos = todos.concat({
+      id: uuidv4(),
+      input: input,
+      status: TodoStatus.OPEN,
+    });
     setTodos(newTodos);
     setInput("");
   };
