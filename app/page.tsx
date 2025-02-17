@@ -1,13 +1,13 @@
 "use client";
-import Image from "next/image";
+//import Image from "next/image";
 
 import Header from "./components/Header";
 import TodoTabs from "./components/TodoTabs";
 import TodoList from "./components/TodoList";
-import AddTodo from "./components/AddTodo";
+//import AddTodo from "./components/AddTodo";
 import { Todo, TodoStatus } from "./types/todo";
 import { v4 as uuidv4 } from "uuid";
-import { ReactElement, ReactEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   // const [todos, setTodos] = useState<Todo[]>([
