@@ -16,10 +16,17 @@ export default function Home() {
   //   { input: "text3", status: TodoStatus.COMPLETED },
   // ]);
 
-  const [todos, setTodos] = useState<Todo[]>(() => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
     const storedTodos = localStorage.getItem("todo-list");
-    return storedTodos ? JSON.parse(storedTodos) : [];
-  });
+    setTodos(storedTodos ? JSON.parse(storedTodos) : []);
+  }, []);
+
+  // const [todos, setTodos] = useState<Todo[]>(() => {
+  //   const storedTodos = localStorage.getItem("todo-list");
+  //   return storedTodos ? JSON.parse(storedTodos) : [];
+  // });
 
   const [currentTab, setCurrentTab] = useState("All");
 
