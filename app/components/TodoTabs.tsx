@@ -10,27 +10,9 @@ const TodoTabs = ({
   currentTab: string;
   setCurrentTab: (card: string) => void;
 }) => {
-  //const [todoOpen, setTodoOpen] = useState<Todo[]>([]);
-  //const [todoInProgress, setTodoInProgress] = useState<Todo[]>([]);
-  //const [todoCompleted, setTodoCompleted] = useState<Todo[]>([]);
   const [tabs, setTabs] = useState<{ name: string; count: number }[]>([]);
 
   useEffect(() => {
-    // setTodoOpen(
-    //   todos.filter((todo) => {
-    //     return todo.status == TodoStatus.OPEN;
-    //   })
-    // );
-    // setTodoInProgress(
-    //   todos.filter((todo) => {
-    //     return todo.status == TodoStatus.IN_PROGRESS;
-    //   })
-    // );
-    // setTodoCompleted(
-    //   todos.filter((todo) => {
-    //     return todo.status == TodoStatus.COMPLETED;
-    //   })
-    // );
     const tabs = [
       {
         name: "All",
